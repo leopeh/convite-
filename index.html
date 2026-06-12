@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Especial ❤️</title>
+
+<style>
+body {
+    background: #ffe6f0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
+h1, h2 {
+    color: #ff0066;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+#sim {
+    background: #4CAF50;
+    color: white;
+}
+
+#nao {
+    background: red;
+    color: white;
+    position: absolute;
+    left: 55%;
+    top: 120px;
+}
+
+.opcao {
+    background: #ff66a3;
+    color: white;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="tela">
+    <h1>Você aceita sair comigo? ❤️</h1>
+
+    <button id="sim" onclick="dataEncontro()">
+        Sim 😍
+    </button>
+
+    <button id="nao">
+        Não 😢
+    </button>
+</div>
+
+<script>
+
+// Faz o botão "Não" fugir
+let nao = document.getElementById("nao");
+
+nao.addEventListener("mouseover", function() {
+    let x = Math.random() * (window.innerWidth - 120);
+    let y = Math.random() * (window.innerHeight - 80);
+
+    nao.style.left = x + "px";
+    nao.style.top = y + "px";
+});
+
+// Escolher data
+function dataEncontro() {
+    document.getElementById("tela").innerHTML = `
+        <h1>❤️ Eba! Que felicidade ❤️</h1>
+        <h2>Que dia vamos sair? 📅</h2>
+
+        <input type="date" id="dia">
+        <br><br>
+
+        <button onclick="horaEncontro()">
+            Próximo ➡️
+        </button>
+    `;
+}
+
+// Escolher hora
+function horaEncontro() {
+    let dia = document.getElementById("dia").value;
+
+    document.getElementById("tela").innerHTML = `
+        <h1>Agora só falta a hora ⏰</h1>
+
+        <input type="time" id="hora">
+        <br><br>
+
+        <button onclick="escolherLugar('${dia}')">
+            Próximo ➡️
+        </button>
+    `;
+}
+
+// Escolher local
+function escolherLugar(dia) {
+    let hora = document.getElementById("hora").value;
+
+    document.getElementById("tela").innerHTML = `
+        <h1>Onde vamos nos encontrar? 📍</h1>
+
+        <button class="opcao"
+            onclick="finalizar('${dia}','${hora}','Shopping')">
+            🛍️ Shopping
+        </button>
+
+        <button class="opcao"
+            onclick="finalizar('${dia}','${hora}','Centro')">
+            🏙️ Centro
+        </button>
+
+        <button class="opcao"
+            onclick="finalizar('${dia}','${hora}','Parque')">
+            🌳 Parque
+        </button>
+    `;
+}
+
+// Tela final
+function finalizar(dia, hora, lugar) {
+    document.getElementById("tela").innerHTML = `
+        <h1>💖 Encontro Marcado 💖</h1>
+
+        <h2>
+            📅 Dia: ${dia}<br><br>
+            ⏰ Hora: ${hora}<br><br>
+            📍 Local: ${lugar}
+        </h2>
+
+        <p>Mal posso esperar para te ver 🥰❤️</p>
+    `;
+}
+
+</script>
+
+</body>
+</html>
