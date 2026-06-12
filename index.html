@@ -1,205 +1,308 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convite Especial ❤️</title>
+<title>Nosso Encontro ❤️</title>
 
 <style>
+
 body {
-    background: #ffe6f0;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #ffeef5);
     text-align: center;
-    margin-top: 50px;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
 }
+
+/* Caixa principal */
+#tela {
+    background: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 25px pink;
+    margin: 100px auto;
+    position: relative;
+    z-index: 2;
+    animation: aparecer 1s;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 
 h1, h2 {
     color: #ff0066;
 }
 
+
 button {
-    padding: 15px 30px;
-    font-size: 20px;
+    padding: 15px 25px;
+    font-size: 18px;
     margin: 10px;
     border: none;
     border-radius: 15px;
     cursor: pointer;
+    transition: 0.3s;
 }
+
+
+button:hover {
+    transform: scale(1.1);
+}
+
 
 #sim {
-    background: #4CAF50;
+    background: #00c853;
     color: white;
 }
+
 
 #nao {
-    background: red;
+    background: #ff1744;
     color: white;
     position: absolute;
-    left: 55%;
-    top: 120px;
 }
 
-.opcao {
-    background: #ff66a3;
-    color: white;
-}
 
 input {
     padding: 10px;
     font-size: 18px;
     border-radius: 10px;
+    border: 2px solid #ff80ab;
 }
 
-img {
-    border-radius: 15px;
-    margin: 10px;
+
+/* Cachorro */
+.cachorro {
+    font-size: 70px;
+    animation: pular 1s infinite;
 }
+
+
+@keyframes pular {
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+
+/* Corações caindo */
+.coracao {
+    position: fixed;
+    top: -50px;
+    color: #ff0066;
+    font-size: 25px;
+    animation: cair 5s linear infinite;
+}
+
+
+@keyframes cair {
+    to {
+        transform: translateY(110vh);
+    }
+}
+
 </style>
-
 </head>
 
 <body>
 
+
+<!-- Música -->
+<audio autoplay loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+
 <div id="tela">
-    <h1>Você aceita sair comigo Layla? ❤️</h1>
 
-    <img src="davi1.png" width="180">
-    <img src="davi2.png" width="180">
-
-    <br>
-
-    <img src="gatinho.png" width="180">
-    <img src="cachorrinho.png" width="180">
-
-    <br><br>
-
-    <button id="sim" onclick="dataEncontro()">
-        Sim 😍
-    </button>
-
-    <button id="nao">
-        Não 😢
-    </button>
+<div class="cachorro">
+🐶
 </div>
 
-<script>
+<h1>
+Você aceita sair comigo? ❤️
+</h1>
 
-// Faz o botão "Não" fugir
+<p>
+Esse cachorrinho ficou triste se você apertar não 🥺
+</p>
+
+<button id="sim" onclick="escolherDia()">
+Sim 😍
+</button>
+
+
+<button id="nao">
+Não 😢
+</button>
+
+</div>
+  <script>
+
+// Criar corações caindo
+setInterval(() => {
+    let coracao = document.createElement("div");
+
+    coracao.className = "coracao";
+    coracao.innerHTML = "❤️";
+
+    coracao.style.left = Math.random() * 100 + "vw";
+
+    document.body.appendChild(coracao);
+
+    setTimeout(() => {
+        coracao.remove();
+    }, 5000);
+
+}, 400);
+
+
+// Botão "Não" foge do mouse
 let nao = document.getElementById("nao");
 
 nao.addEventListener("mouseover", function() {
-    let x = Math.random() * (window.innerWidth - 120);
-    let y = Math.random() * (window.innerHeight - 80);
+
+    let x = Math.random() * (window.innerWidth - 150);
+    let y = Math.random() * (window.innerHeight - 100);
 
     nao.style.left = x + "px";
     nao.style.top = y + "px";
+
 });
 
-// Escolher data
-function dataEncontro() {
-    document.getElementById("tela").innerHTML = `
-        <h1>❤️ Ebaaaa! Você aceitou 😍</h1>
 
-        <img src="davi2.png" width="220">
+// Escolher dia
+function escolherDia() {
 
-        <p>
-        Eu depois que você apertou "Sim" 😂❤️
-        </p>
+    tela.innerHTML = `
+        <h1>❤️ Ebaaa! ❤️</h1>
 
-        <h2>Que dia ficaria melhor pra você? 📅</h2>
+        <h2>Que dia vamos sair? 📅</h2>
 
         <input type="date" id="dia">
 
         <br><br>
 
-        <button onclick="horaEncontro()">
-            Próximo ➡️
+        <button onclick="escolherHora()">
+        Próximo ➡️
         </button>
     `;
 }
 
+
 // Escolher hora
-function horaEncontro() {
+function escolherHora() {
+
     let dia = document.getElementById("dia").value;
 
-    document.getElementById("tela").innerHTML = `
-        <h1>Agora só falta a hora ⏰</h1>
-
-        <p>
-        Prometo chegar no horário 😎
-        </p>
+    tela.innerHTML = `
+        <h1>⏰ Que horas vamos nos ver?</h1>
 
         <input type="time" id="hora">
 
         <br><br>
 
         <button onclick="escolherLugar('${dia}')">
-            Próximo ➡️
+        Próximo ➡️
         </button>
     `;
 }
+
 
 // Escolher local
 function escolherLugar(dia) {
+
     let hora = document.getElementById("hora").value;
 
-    document.getElementById("tela").innerHTML = `
-        <h1>Onde vamos nos encontrar? 📍</h1>
 
-        <img src="gatinho.png" width="220">
+    tela.innerHTML = `
+        <h1>📍 Onde vamos sair?</h1>
 
-        <p>
-        Escolhe com carinho 🥺❤️
-        </p>
 
-        <button class="opcao"
-            onclick="finalizar('${dia}','${hora}','Shopping')">
-            🛍️ Shopping
+        <button onclick="escolherAtividade('${dia}', '${hora}', '🌳 Parque')">
+        🌳 Parque
         </button>
 
-        <button class="opcao"
-            onclick="finalizar('${dia}','${hora}','Centro')">
-            🏙️ Centro
+
+        <button onclick="escolherAtividade('${dia}', '${hora}', '🛍️ Shopping')">
+        🛍️ Shopping
         </button>
 
-        <button class="opcao"
-            onclick="finalizar('${dia}','${hora}','Parque')">
-            🌳 Parque
+
+        <button onclick="escolherAtividade('${dia}', '${hora}', '🏙️ Centro')">
+        🏙️ Centro
         </button>
+
     `;
 }
+
+
+// Escolher atividade
+function escolherAtividade(dia, hora, lugar) {
+
+
+    tela.innerHTML = `
+        <h1>😍 O que vamos fazer?</h1>
+
+
+        <button onclick="finalizar('${dia}', '${hora}', '${lugar}', '🍿 Assistir um filme')">
+        🍿 Assistir filme
+        </button>
+
+
+        <button onclick="finalizar('${dia}', '${hora}', '${lugar}', '🍔 Comer algo gostoso')">
+        🍔 Comer algo
+        </button>
+
+
+        <button onclick="finalizar('${dia}', '${hora}', '${lugar}', '🚶 Passear e conversar')">
+        🚶 Passear
+        </button>
+
+    `;
+}
+
 
 // Tela final
-function finalizar(dia, hora, lugar) {
-    document.getElementById("tela").innerHTML = `
-        <h1>💖 Encontro Marcado 💖</h1>
+function finalizar(dia, hora, lugar, atividade) {
+
+
+    tela.innerHTML = `
+
+        <h1>💖 Encontro confirmado! 💖</h1>
+
 
         <h2>
-            📅 Dia: ${dia}<br><br>
-            ⏰ Hora: ${hora}<br><br>
-            📍 Local: ${lugar}
+        📅 Dia: ${dia} <br>
+        ⏰ Hora: ${hora} <br>
+        📍 Local: ${lugar} <br>
+        🎉 Vamos: ${atividade}
         </h2>
 
-        <img src="cachorrinho.png" width="220">
-        <img src="gatinho.png" width="220">
 
-        <br>
+        <h2>
+        Agora não tem mais como fugir 😂❤️
+        </h2>
 
-        <img src="davi1.png" width="220">
-
-        <p>
-        🥳 Eu depois de conseguir marcar esse encontro
-        </p>
 
         <p>
-        Mal posso esperar para te ver ❤️
+        Estou contando os segundos para te ver 🥰🐶
         </p>
 
-        <p>
-        Obrigado por aceitar 😊
-        </p>
     `;
 }
+
 
 </script>
 
