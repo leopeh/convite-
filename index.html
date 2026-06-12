@@ -10,7 +10,7 @@ body {
     background: #ffe6f0;
     font-family: Arial, sans-serif;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 h1, h2 {
@@ -49,6 +49,11 @@ input {
     font-size: 18px;
     border-radius: 10px;
 }
+
+img {
+    border-radius: 15px;
+    margin: 10px;
+}
 </style>
 
 </head>
@@ -56,7 +61,17 @@ input {
 <body>
 
 <div id="tela">
-    <h1>Você aceita sair comigo? ❤️</h1>
+    <h1>Você aceita sair comigo Layla? ❤️</h1>
+
+    <img src="davi1.png" width="180">
+    <img src="davi2.png" width="180">
+
+    <br>
+
+    <img src="gatinho.png" width="180">
+    <img src="cachorrinho.png" width="180">
+
+    <br><br>
 
     <button id="sim" onclick="dataEncontro()">
         Sim 😍
@@ -83,10 +98,18 @@ nao.addEventListener("mouseover", function() {
 // Escolher data
 function dataEncontro() {
     document.getElementById("tela").innerHTML = `
-        <h1>❤️ Eba! Que felicidade ❤️</h1>
-        <h2>Que dia vamos sair? 📅</h2>
+        <h1>❤️ Ebaaaa! Você aceitou 😍</h1>
+
+        <img src="davi2.png" width="220">
+
+        <p>
+        Eu depois que você apertou "Sim" 😂❤️
+        </p>
+
+        <h2>Que dia ficaria melhor pra você? 📅</h2>
 
         <input type="date" id="dia">
+
         <br><br>
 
         <button onclick="horaEncontro()">
@@ -102,7 +125,12 @@ function horaEncontro() {
     document.getElementById("tela").innerHTML = `
         <h1>Agora só falta a hora ⏰</h1>
 
+        <p>
+        Prometo chegar no horário 😎
+        </p>
+
         <input type="time" id="hora">
+
         <br><br>
 
         <button onclick="escolherLugar('${dia}')">
@@ -117,6 +145,12 @@ function escolherLugar(dia) {
 
     document.getElementById("tela").innerHTML = `
         <h1>Onde vamos nos encontrar? 📍</h1>
+
+        <img src="gatinho.png" width="220">
+
+        <p>
+        Escolhe com carinho 🥺❤️
+        </p>
 
         <button class="opcao"
             onclick="finalizar('${dia}','${hora}','Shopping')">
@@ -146,7 +180,24 @@ function finalizar(dia, hora, lugar) {
             📍 Local: ${lugar}
         </h2>
 
-        <p>Mal posso esperar para te ver 🥰❤️</p>
+        <img src="cachorrinho.png" width="220">
+        <img src="gatinho.png" width="220">
+
+        <br>
+
+        <img src="davi1.png" width="220">
+
+        <p>
+        🥳 Eu depois de conseguir marcar esse encontro
+        </p>
+
+        <p>
+        Mal posso esperar para te ver ❤️
+        </p>
+
+        <p>
+        Obrigado por aceitar 😊
+        </p>
     `;
 }
 
